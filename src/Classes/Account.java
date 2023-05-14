@@ -17,6 +17,30 @@ public class Account {
         this.cardsRedeemed = 0;
     }
 
+    public String getUsername(){
+        return this.username;
+    }
+
+    public void setUsername(String newUsername){
+        this.username = newUsername;
+    }
+
+    public int getBalance(){
+        return this.balance;
+    }
+
+    public void setBalance(int newBalance){
+        this.balance = newBalance;
+    }
+
+    public int getCardsRedeemed(){
+        return this.cardsRedeemed;
+    }
+
+    public void setCardsRedeemed(int newCardsRedeemedCount){
+        this.cardsRedeemed = newCardsRedeemedCount;
+    }
+
     public String redeemCard(String code){
 
         if(code.length() != 12){
@@ -27,17 +51,19 @@ public class Account {
             // Read the HashMap from the file
             try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("src\\Binary Files\\Cards.dat"))) {
                 @SuppressWarnings("unchecked")
-                HashMap<String, Boolean> readMap = (HashMap<String, Boolean>) inputStream.readObject();
+                HashMap<String, Cards> readMap = (HashMap<String, Cards>) inputStream.readObject();
 
                 if(readMap.get(code) == null){
                     return "The code you entered does not belong to a card";
                 }
                 else{
-                    if(!readMap.get(code)){
+                    if(!readMap.get(code).getIsRedeemed()){
                         return "The code you entered has been used.";
                     }
                     else{
-                        readMap.get(code)
+                        readMap.get(code).setIsRedeemed(true);
+                        this.balance += readMap.get(code).getGiftAmount();
+                        this.cardsRedeemed++;
                         return "The card has been redeemed successfully!";
                     }
                 }
