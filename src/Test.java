@@ -14,7 +14,7 @@ public class Test { /* this code tests creating cards, storing cards in a HashMa
     public static void main(String[] args) {
         
         ArrayList<Cards> cardsArrayList = createCards(10, 100); // make 10 cards that contain 100 points each
-        HashMap<String, Boolean> cardsHashMap = new HashMap<>(); // initilize the hashmap
+        HashMap<String, Cards> cardsHashMap = new HashMap<>(); // initilize the hashmap
 
         putInMap(cardsArrayList, cardsHashMap); // put created cards in the hashmap
 
@@ -28,7 +28,7 @@ public class Test { /* this code tests creating cards, storing cards in a HashMa
         // Read the HashMap from the file
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("src\\Binary Files\\Cards.dat"))) {
             @SuppressWarnings("unchecked")
-            HashMap<String, Boolean> readMap = (HashMap<String, Boolean>) inputStream.readObject();
+            HashMap<String, Cards> readMap = (HashMap<String, Cards>) inputStream.readObject();
             printHashMap(readMap); // print the HashMap
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -59,10 +59,10 @@ public class Test { /* this code tests creating cards, storing cards in a HashMa
 
     }
 
-    public static void putInMap(ArrayList<Cards> cards, HashMap<String, Boolean> map){
+    public static void putInMap(ArrayList<Cards> cards, HashMap<String, Cards> map){
 
         for(int i = 0; i < cards.size(); i++){
-            map.put(cards.get(i).getCode(), cards.get(i).getIsRedeemed());
+            map.put(cards.get(i).getCode(), cards.get(i));
         }
 
 

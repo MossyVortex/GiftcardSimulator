@@ -1,8 +1,9 @@
 package Classes;
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class Cards {
+public class Cards implements Serializable {
 
     private String code;
     private boolean isRedeemed;
