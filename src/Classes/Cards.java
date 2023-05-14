@@ -48,6 +48,8 @@ public class Cards implements Serializable {
         this.code = code;
     }
 
+    // except for this one turns out it is useful
+    
     public void setIsRedeemed(boolean isRedeemed){
         this.isRedeemed = isRedeemed;
     }
